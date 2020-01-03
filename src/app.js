@@ -5,14 +5,14 @@ const cors = require('cors')
 const helmet = require('helmet')
 const app = express()
 
-const cloudinaryRouter = require('./cloudinary')
-
 app.use(morgan('common'))
 app.use(helmet())
 app.use(cors())
 app.use(express.json())
 
-app.use('/api', express.static('uploads'), cloudinaryRouter)
+const cloudinaryRouter = require('./cloudinary')
+
+app.use('/api', cloudinaryRouter)
 
 app.get('/', (req, res) => {
     res.send('Server Running!')
